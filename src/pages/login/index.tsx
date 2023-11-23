@@ -9,13 +9,15 @@ interface LoginUser {
 
 const onFinish = async (values: LoginUser) => {
   const res = await login(values.username, values.password);
-
+  const { code, message: msg, data } = res.data;
   if (res.status === 201 || res.status === 200) {
     message.success('登录成功');
-
-    console.log(res.data);
+    localStorage.setItem('access_token', data.accessToken);
+    localStorage.setItem('refresh_token', data.refreshToken);
+    localStorage.setItem('user_info', JSON.stringify(data.userInfo));
+    console.log(data);
   } else {
-    message.error(res.data.data || '系统繁忙，请稍后再试');
+    message.error(data || '系统繁忙，请稍后再试');
   }
 };
 
