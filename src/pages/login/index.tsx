@@ -1,4 +1,5 @@
 import { Button, Form, Input, message } from 'antd';
+import { Link } from 'react-router-dom';
 import { login } from '../../const/interface';
 import './index.css';
 
@@ -54,8 +55,8 @@ export function Login() {
 
         <Form.Item {...layout2}>
           <div className="links">
-            <a href="">创建账号</a>
-            <a href="">忘记密码</a>
+            <Link to="/register">创建账号</Link>
+            <Link to="/update_password">忘记密码</Link>
           </div>
         </Form.Item>
 

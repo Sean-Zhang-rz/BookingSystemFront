@@ -1,7 +1,7 @@
 import { Button, Form, Input, message } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { register, registerCaptcha } from '../../const/interface';
 import './index.css';
 
@@ -35,6 +35,9 @@ export function Register() {
 
     if (res.status === 201 || res.status === 200) {
       message.success('注册成功');
+      setTimeout(() => {
+        navigate('/login')
+      }, 1500)
 
     } else {
       message.error(res.data.data || '系统繁忙，请稍后再试');
@@ -124,7 +127,7 @@ export function Register() {
         {...layout2}
       >
         <div className='links'>
-          已有账号？去<a href=''>登录</a>
+          已有账号？去<Link to="/login">登录</Link>
         </div>
       </Form.Item>
 
