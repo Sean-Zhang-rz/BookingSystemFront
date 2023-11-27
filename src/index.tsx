@@ -5,12 +5,23 @@ import { Register } from './pages/register';
 import { Login } from './pages/login';
 import { UpdatePassword } from './pages/updatePassword';
 import { ErrorPage } from './pages/errorPage';
+import { Home } from './pages/home';
 
 const routes = [
   {
     path: '/',
-    element: <div>index</div>,
+    element: <Home />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: 'aaa',
+        element: <div>aaa</div>,
+      },
+      {
+        path: 'bbb',
+        element: <div>bbb</div>,
+      },
+    ],
   },
   {
     path: 'login',
