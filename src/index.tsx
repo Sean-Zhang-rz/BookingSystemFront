@@ -6,6 +6,7 @@ import { Login } from './pages/login';
 import { UpdatePassword } from './pages/updatePassword';
 import { ErrorPage } from './pages/errorPage';
 import { Home } from './pages/home';
+import { UpdateInfo } from './pages/update_info';
 
 const routes = [
   {
@@ -14,8 +15,8 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: 'aaa',
-        element: <div>aaa</div>,
+        path: 'update_info',
+        element: <UpdateInfo />,
       },
       {
         path: 'bbb',
