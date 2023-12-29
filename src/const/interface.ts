@@ -120,3 +120,28 @@ export async function updateInfo(data: UserInfo) {
 export async function updateUserInfoCaptcha() {
   return await axiosInstance.get('/user/update/captcha');
 }
+
+export async function userSearch(
+  pageNo: number,
+  pageSize: number,
+  username?: string,
+  nickName?: string,
+  email?: string
+) {
+  return await axiosInstance.get('/user/list', {
+    params: {
+      username,
+      nickName,
+      email,
+      pageNo,
+      pageSize,
+    },
+  });
+}
+export async function freeze(id: number) {
+  return await axiosInstance.post('/user/freeze', {
+    params: {
+      id,
+    },
+  });
+}
