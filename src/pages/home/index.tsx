@@ -6,7 +6,9 @@ export function Home() {
   return (
     <div id="index-container">
       <div className="header">
-        <h1>会议室预定系统</h1>
+        <Link to="/" className="sys_name">
+          <h1>会议室预定系统</h1>
+        </Link>
         <Link to={'/update_info'}>
           <UserOutlined className="icon" />
         </Link>
