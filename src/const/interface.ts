@@ -117,8 +117,12 @@ export async function updateInfo(data: UserInfo) {
   return await axiosInstance.post('/user/update', data);
 }
 
-export async function updateUserInfoCaptcha() {
-  return await axiosInstance.get('/user/update/captcha');
+export async function updateUserInfoCaptcha(email: string) {
+  return await axiosInstance.get('/user/update/captcha', {
+    params: {
+      email,
+    },
+  });
 }
 
 export async function userSearch(

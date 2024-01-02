@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { HeadPicUpload } from './HeadPicUpload';
-import { getUserInfo, updateUserInfoCaptcha } from '../../const/interface';
+import { getUserInfo, updateInfo, updateUserInfoCaptcha } from '../../const/interface';
 
 export interface UserInfo {
   username: string;
@@ -25,11 +25,24 @@ export function InfoModify() {
   const [id, setId] = useState(0);
 
   const onFinish = useCallback(async (values: UserInfo) => {
+    const res = await updateInfo(values);
 
+    if (res.status === 201 || res.status === 200) {
+      const { message: msg, data } = res.data;
+      if (msg === 'success') {
+        message.success('用户信息更新成功');
+      } else {
+        message.error(data);
+      }
+    } else {
+      message.error('系统繁忙，请稍后再试');
+    }
   }, []);
 
   const sendCaptcha = useCallback(async function () {
-    const res = await updateUserInfoCaptcha();
+    const address = form.getFieldValue('email');
+    if (!address) throw new Error('请输入邮箱地址')
+    const res = await updateUserInfoCaptcha(address);
     if (res.status === 201 || res.status === 200) {
       message.success(res.data.data);
       setId(pre => pre + 1)
