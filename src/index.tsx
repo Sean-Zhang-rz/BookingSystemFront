@@ -20,33 +20,33 @@ const routes = [
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Menu />,
         children: [
           {
             path: 'user_manage',
-            element: <UserManage />
+            element: <UserManage />,
           },
           {
             path: 'update_info',
             element: <UpdateInfo />,
           },
-        ]
+        ],
       },
       {
-        path: "/user",
+        path: '/user',
         element: <ModifyMenu />,
         children: [
           {
-            path: "info_modify",
-            element: <InfoModify />
+            path: 'info_modify',
+            element: <InfoModify />,
           },
           {
-            path: "password_modify",
-            element: <PasswordModify />
-          }
-        ]
-      }
+            path: 'password_modify',
+            element: <PasswordModify />,
+          },
+        ],
+      },
     ],
   },
   {
