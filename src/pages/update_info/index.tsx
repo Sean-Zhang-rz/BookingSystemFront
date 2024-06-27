@@ -36,10 +36,12 @@ export function UpdateInfo() {
     query();
   }, []);
 
-  const onFinish = useCallback(async (values: UserInfo) => {}, []);
+  const onFinish = useCallback(async (values: UserInfo) => { }, []);
 
   const sendCaptcha = useCallback(async function () {
-    const res = await updateUserInfoCaptcha();
+    const address = form.getFieldValue('email') as string;
+    if (!address) throw new Error('请输入邮箱地址')
+    const res = await updateUserInfoCaptcha(address);
     if (res.status === 201 || res.status === 200) {
       message.success(res.data.data);
     } else {

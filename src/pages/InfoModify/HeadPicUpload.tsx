@@ -14,7 +14,10 @@ const props: DraggerProps = {
   action: 'http://localhost:3005/user/upload',
   onChange(info) {
     const { status } = info.file;
+    console.log(info);
     if (status === 'done') {
+
+
       onChange(info.file.response.data);
       message.success(`${info.file.name} 文件上传成功`);
     } else if (status === 'error') {
