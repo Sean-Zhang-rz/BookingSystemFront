@@ -36,16 +36,16 @@ const routes = [
           },
           {
             path: 'meeting_room_manage',
-            element: <MeetingRoomManage />
+            element: <MeetingRoomManage />,
           },
           {
             path: 'booking_manage',
-            element: <BookingManage />
+            element: <BookingManage />,
           },
           {
             path: 'statistics',
-            element: <Statistics />
-          }
+            element: <Statistics />,
+          },
         ],
       },
       {
