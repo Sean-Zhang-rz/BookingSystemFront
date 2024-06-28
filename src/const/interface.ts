@@ -3,6 +3,9 @@ import { RegisterUser } from '../pages/register';
 import { UpdatePassword } from '../pages/updatePassword';
 import { UserInfo } from '../pages/update_info';
 import { message } from 'antd';
+import { CreateMeetingRoom } from '../pages/MeetingRoomManage/CreateMeetingRoomModal';
+import { UpdateMeetingRoom } from '../pages/MeetingRoomManage/UpdateMeetingRoom';
+
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3005/',
@@ -109,8 +112,12 @@ export async function updatePassword(data: UpdatePassword) {
   return await axiosInstance.post('/user/update_password', data);
 }
 
-export async function getUserInfo() {
-  return await axiosInstance.get('/user/info');
+export async function getUserInfo(userId?: number) {
+  return await axiosInstance.get('/user/info', {
+    params: {
+      userId,
+    },
+  });
 }
 
 export async function updateInfo(data: UserInfo) {
@@ -148,4 +155,37 @@ export async function freeze(id: number) {
       id,
     },
   });
+}
+
+
+export async function meetingRoomList(
+  name: string, 
+  capacity: number, 
+  equipment: string, 
+  pageNo: number, 
+  pageSize: number
+) {
+  return await axiosInstance.get('/meeting-room/list', {
+    params: {
+      name,
+      capacity,
+      equipment,
+      pageNo,
+      pageSize
+    }
+  });
+}
+export async function deleteMeetingRoom(id: number) {
+    return await axiosInstance.delete('/meeting-room/' + id);
+}
+export async function createMeetingRoom(meetingRoom: CreateMeetingRoom) {
+    return await axiosInstance.post('/meeting-room/create', meetingRoom);
+}
+
+export async function updateMeetingRoom(meetingRoom: UpdateMeetingRoom) {
+    return await axiosInstance.put('/meeting-room/update', meetingRoom);
+}
+
+export async function findMeetingRoom(id: number) {
+    return await axiosInstance.get('/meeting-room/' + id);
 }
