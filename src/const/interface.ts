@@ -7,6 +7,7 @@ import { CreateMeetingRoom } from '../pages/MeetingRoomManage/CreateMeetingRoomM
 import { UpdateMeetingRoom } from '../pages/MeetingRoomManage/UpdateMeetingRoom';
 import dayjs from 'dayjs';
 import { SearchBooking } from '../pages/BookingManage/BookingManage';
+import { CreateBooking } from '../pages/MeetingRoomManage/CreateBookingModal';
 
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:3005/',
@@ -229,4 +230,21 @@ export async function reject(id: number) {
 
 export async function unbind(id: number) {
   return await axiosInstance.get('/booking/unbind/' + id);
+}
+
+export async function bookingAdd(booking: CreateBooking) {
+  const rangeStartDateStr = dayjs(booking.rangeStartDate).format('YYYY-MM-DD');
+  const rangeStartTimeStr = dayjs(booking.rangeStartTime).format('HH:mm');
+  const startTime = dayjs(rangeStartDateStr + ' ' + rangeStartTimeStr).valueOf();
+
+  const rangeEndDateStr = dayjs(booking.rangeEndDate).format('YYYY-MM-DD');
+  const rangeEndTimeStr = dayjs(booking.rangeEndTime).format('HH:mm');
+  const endTime = dayjs(rangeEndDateStr + ' ' + rangeEndTimeStr).valueOf();
+
+  return await axiosInstance.post('/booking/add', {
+    meetingRoomId: booking.meetingRoomId,
+    startTime,
+    endTime,
+    note: booking.note,
+  });
 }

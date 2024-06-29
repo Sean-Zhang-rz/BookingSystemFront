@@ -4,6 +4,7 @@ import { ColumnsType } from 'antd/es/table';
 import './index.css';
 import { freeze, userSearch } from '../../const/interface';
 import useForm from 'antd/es/form/hooks/useForm';
+import dayjs from 'dayjs';
 
 interface SearchUser {
   username: string;
@@ -95,6 +96,10 @@ export function UserManage() {
       {
         title: '注册时间',
         dataIndex: 'createTime',
+        render: (_, record) =>
+          record.createTime
+            ? dayjs(new Date(record.createTime)).format('YYYY-MM-DD hh:mm:ss')
+            : '-',
       },
       {
         title: '操作',

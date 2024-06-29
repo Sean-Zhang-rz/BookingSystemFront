@@ -6,6 +6,7 @@ import { useForm } from 'antd/es/form/Form';
 import { deleteMeetingRoom, meetingRoomList } from '../../const/interface';
 import { CreateMeetingRoomModal } from './CreateMeetingRoomModal';
 import { UpdateMeetingRoomModal } from './UpdateMeetingRoom';
+import { CreateBookingModal } from './CreateBookingModal';
 
 interface SearchMeetingRoom {
   name: string;
@@ -33,6 +34,8 @@ export function MeetingRoomManage() {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [updateId, setUpdateId] = useState<number>();
+  const [isCreateBookingModalOpen, setIsCreateBookingModalOpen] = useState(false);
+  const [currentMeetingRoom, setCurrentMeetingRoom] = useState<MeetingRoomSearchResult>();
 
   const handleDelete = useCallback(async (id: number) => {
     try {
@@ -108,6 +111,17 @@ export function MeetingRoomManage() {
             >
               更新
             </a>
+            <div>
+              <a
+                href="#"
+                onClick={() => {
+                  setIsCreateModalOpen(true);
+                  setCurrentMeetingRoom(record);
+                }}
+              >
+                预定
+              </a>
+            </div>
           </div>
         ),
       },
@@ -200,6 +214,15 @@ export function MeetingRoomManage() {
             setNum(Math.random());
           }}
         ></UpdateMeetingRoomModal>
+        {currentMeetingRoom ? (
+          <CreateBookingModal
+            meetingRoom={currentMeetingRoom}
+            isOpen={isCreateBookingModalOpen}
+            handleClose={() => {
+              setIsCreateBookingModalOpen(false);
+            }}
+          ></CreateBookingModal>
+        ) : null}
 
         <Table
           columns={columns}
